@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PriorityQueue.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hw04</a> &gt; <a href="index.source.html" class="el_package">hw04</a> &gt; <span class="el_source">PriorityQueue.java</span></div><h1>PriorityQueue.java</h1><pre class="source lang-java linenums">package hw04;
+
+/**
+ * A queue that stores elements in priority order.
+ */
+public class PriorityQueue {
+
+  /**
+   * A single node in the priority queue's underlying list
+   */
+  private static class Node {
+    public final int priority;
+    public final String value;
+    public Node next;
+
+<span class="fc" id="L16">    public Node(int priority, String value, Node next) {</span>
+<span class="fc" id="L17">      this.priority = priority;</span>
+<span class="fc" id="L18">      this.value = value;</span>
+<span class="fc" id="L19">      this.next = next;</span>
+<span class="fc" id="L20">    }</span>
+  }
+
+  /**
+   * A list of nodes storing queue entries; the list is stored in
+   * non-decreasing order by priority.
+   */
+  private Node head;
+
+  /**
+   * Create an empty priority queue.
+   */
+<span class="fc" id="L32">  public PriorityQueue() {</span>
+<span class="fc" id="L33">    head = null;</span>
+<span class="fc" id="L34">  }</span>
+
+  /**
+   * Recognize empty queues.
+   * @return true if the queue is empty, otherwise false.
+   */
+  boolean isEmpty() {
+<span class="fc bfc" id="L41" title="All 2 branches covered.">    return head == null;</span>
+  }
+
+  /**
+   * Adds an element to the queue with the specified priority.
+   * @param priority new element's priority
+   * @param value new element's value
+   */
+  void add(int priority, String value) {
+<span class="fc bfc" id="L50" title="All 2 branches covered.">    if (head == null) {</span>
+<span class="fc" id="L51">      head = new Node(priority, value, null);</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">    } else if (priority &gt;= head.priority) {</span>
+<span class="fc" id="L53">      head = new Node(priority, value, head);</span>
+    } else {
+<span class="fc" id="L55">      Node predecessor = head;</span>
+<span class="fc bfc" id="L56" title="All 4 branches covered.">      while (predecessor.next != null &amp;&amp; priority &lt; predecessor.next.priority) {</span>
+<span class="fc" id="L57">        predecessor = predecessor.next;</span>
+      }
+      // INVARIANT: either predecessor.next is null, or predecessor.next
+      // is the first node in the list whose priority is less than or equal
+      // to the argument priority.
+<span class="fc" id="L62">      predecessor.next = new Node(priority, value, predecessor.next);</span>
+    }
+<span class="fc" id="L64">  }</span>
+
+  /**
+   * Returns an element with the highest priority in the queue.
+   * @return element with the highest priority.  If there are multiple such
+   *   elements, returns the one added to the queue most recently.
+   */
+  String getMax() {
+<span class="fc bfc" id="L72" title="All 2 branches covered.">    if (head == null) {</span>
+<span class="fc" id="L73">      throw new IllegalStateException(&quot;queue is empty&quot;);</span>
+    } else {
+<span class="fc" id="L75">      return head.value;</span>
+    }
+  }
+
+  /**
+   * Removes an element with the highest priority from the queue.  If there
+   * are multiple such elements, removes the one added to the queue most
+   * recently.
+   */
+  void popMax() {
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">    if (head == null) {</span>
+<span class="fc" id="L86">      throw new IllegalStateException(&quot;queue is empty&quot;);</span>
+    } else {
+<span class="nc" id="L88">      head = head.next;</span>
+    }
+<span class="nc" id="L90">  }</span>
+  /**
+   * Retrieves, but does not remove, the element with the highest priority in the queue.
+   * This method provides a way to see the element at the front of the priority queue without modifying the queue.
+   * If the queue is empty, this method throws an {@link IllegalStateException}.
+   *
+   * @return The value of the element with the highest priority currently in the queue.
+   * @throws IllegalStateException if the queue is empty, indicating there are no elements to peek at.
+   */
+  public String peek(){
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">    if (head == null){</span>
+<span class="nc" id="L101">      throw new IllegalStateException(&quot;Empty&quot;);</span>
+    }else{
+<span class="fc" id="L103">      return head.value;</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

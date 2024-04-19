@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="hw04.PriorityQueueTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2024-03-25T02:49:16" hostname="AppledeMacBook-Air-2.local" time="0.006">
+  <properties/>
+  <testcase name="popMaxException()" classname="hw04.PriorityQueueTest" time="0.0"/>
+  <testcase name="getMax()" classname="hw04.PriorityQueueTest" time="0.0"/>
+  <testcase name="popMax()" classname="hw04.PriorityQueueTest" time="0.0"/>
+  <testcase name="add()" classname="hw04.PriorityQueueTest" time="0.002"/>
+  <testcase name="getMaxException()" classname="hw04.PriorityQueueTest" time="0.0"/>
+  <testcase name="isEmpty()" classname="hw04.PriorityQueueTest" time="0.0"/>
+  <system-out><![CDATA[Priority 5
+Priority 5
+Priority 5
+Priority 5
+Priority 5
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

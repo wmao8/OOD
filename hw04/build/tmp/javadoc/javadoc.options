@@ -1,0 +1,9 @@
+-classpath '/Users/Mao/Desktop/5004_NEU/5004_Richard/Student_wmao8/hw04/build/classes/java/main:/Users/Mao/Desktop/5004_NEU/5004_Richard/Student_wmao8/hw04/build/resources/main'
+-d '/Users/Mao/Desktop/5004_NEU/5004_Richard/Student_wmao8/hw04/build/docs/javadoc'
+-doctitle 'hw04 1.0 API'
+-notimestamp 
+-quiet 
+-windowtitle 'hw04 1.0 API'
+'/Users/Mao/Desktop/5004_NEU/5004_Richard/Student_wmao8/hw04/src/main/java/hw04/PriorityQueue.java'
+'/Users/Mao/Desktop/5004_NEU/5004_Richard/Student_wmao8/hw04/src/main/java/hw04/GenericValuePriorityQueue.java'
+'/Users/Mao/Desktop/5004_NEU/5004_Richard/Student_wmao8/hw04/src/main/java/hw04/GenericPriorityQueue.java'

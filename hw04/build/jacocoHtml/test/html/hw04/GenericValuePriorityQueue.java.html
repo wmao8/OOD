@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GenericValuePriorityQueue.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hw04</a> &gt; <a href="index.source.html" class="el_package">hw04</a> &gt; <span class="el_source">GenericValuePriorityQueue.java</span></div><h1>GenericValuePriorityQueue.java</h1><pre class="source lang-java linenums">package hw04;
+
+
+
+/**
+ * A generic queue that stores elements according to their priorities. It allows for the
+ * retrieval of elements based on priority order, from the highest to the lowest. This class
+ * is parameterized with type {@code &lt;V&gt;}, representing the type of values stored in the queue.
+ * Each value is associated with an integer priority.
+ *
+ * @param &lt;V&gt; The type of the values stored in the queue.
+ */
+
+public class GenericValuePriorityQueue&lt;V&gt; {
+
+
+  /**
+   * Represents a node in the priority queue. Each node holds a priority, a value,
+   * and a reference to the next node.
+   *
+   * @param &lt;V&gt; The type of the value stored in each node.
+   */
+  private static class Node&lt;V&gt; {
+    public final int priority;
+    public final V value;
+    public Node&lt;V&gt; next;
+
+    /**
+     * Constructs a new Node with the specified priority, value, and next node reference.
+     * @param priority the priority of the node
+     * @param value the value of the node
+     * @param next the next node in the priority queue. or {@code null} if there is no next node
+     */
+
+<span class="fc" id="L35">    public Node(int priority, V value, Node&lt;V&gt; next) {</span>
+<span class="fc" id="L36">      this.priority = priority;</span>
+<span class="fc" id="L37">      this.value = value;</span>
+<span class="fc" id="L38">      this.next = next;</span>
+<span class="fc" id="L39">    }</span>
+  }
+
+  /**
+   * A list of nodes storing queue entries; the list is stored in
+   * non-decreasing order by priority.
+   */
+  private Node&lt;V&gt; head;
+
+  /**
+   * Create an empty priority queue.
+   */
+<span class="fc" id="L51">  public GenericValuePriorityQueue() {</span>
+<span class="fc" id="L52">    head = null;</span>
+<span class="fc" id="L53">  }</span>
+
+  /**
+   * Recognize empty queues.
+   * @return true if the queue is empty, otherwise false.
+   */
+  boolean isEmpty() {
+<span class="fc bfc" id="L60" title="All 2 branches covered.">    return head == null;</span>
+  }
+
+  /**
+   * Adds an element to the queue with the specified priority.
+   * @param priority new element's priority
+   * @param value new element's value
+   */
+  void add(int priority, V value) {
+<span class="fc bfc" id="L69" title="All 2 branches covered.">    if (head == null){</span>
+<span class="fc" id="L70">      head = new Node&lt;&gt;(priority, value, null);</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">    } else if (priority &gt;= head.priority) {</span>
+<span class="fc" id="L72">      head = new Node&lt;&gt;(priority, value, head);</span>
+    } else {
+<span class="fc" id="L74">      Node&lt;V&gt; predecessor = head;</span>
+<span class="fc bfc" id="L75" title="All 4 branches covered.">      while (predecessor.next != null &amp;&amp; priority &lt; predecessor.next.priority) {</span>
+<span class="fc" id="L76">        predecessor = predecessor.next;</span>
+      }
+      // INVARIANT: either predecessor.next is null, or predecessor.next
+      // is the first node in the list whose priority is less than or equal
+      // to the argument priority.
+<span class="fc" id="L81">      predecessor.next = new Node&lt;&gt;(priority, value, predecessor.next);</span>
+    }
+<span class="fc" id="L83">  }</span>
+
+  /**
+   * Returns an element with the highest priority in the queue.
+   * @return element with the highest priority.  If there are multiple such
+   *   elements, returns the one added to the queue most recently.
+   * @throws IllegalStateException If the queue is empty.
+   */
+  V getMax() {
+<span class="fc bfc" id="L92" title="All 2 branches covered.">    if (head == null) {</span>
+<span class="fc" id="L93">      throw new IllegalStateException(&quot;queue is empty&quot;);</span>
+    } else {
+<span class="fc" id="L95">      return head.value;</span>
+    }
+  }
+
+  /**
+   * Removes an element with the highest priority from the queue.  If there
+   * are multiple such elements, removes the one added to the queue most
+   * recently.
+   * @throws IllegalStateException If the queue is empty.
+   */
+  void popMax() {
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">    if (head == null) {</span>
+<span class="nc" id="L107">      throw new IllegalStateException(&quot;queue is empty&quot;);</span>
+    } else {
+<span class="fc" id="L109">      head = head.next;</span>
+    }
+<span class="fc" id="L111">  }</span>
+
+  /**
+   * Retrieves, but does not remove, the element with the highest priority in the queue.
+   *
+   * This method provides a way to see the element at the front of the priority queue without modifying the queue.
+   * If the queue is empty, this method throws an IllegalStateException.
+   *
+   * @return The value of the element with the highest priority currently in the queue.
+   * @throws IllegalStateException if the queue is empty, indicating there are no elements to peek at.
+   */
+  // peek function added for testing purpose
+
+  public V peek(){
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">    if (head == null){</span>
+<span class="nc" id="L126">      throw new IllegalStateException(&quot;Empty&quot;);</span>
+    }else{
+<span class="fc" id="L128">      return head.value;</span>
+    }
+  }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

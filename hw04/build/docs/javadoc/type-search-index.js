@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"hw04","l":"GenericPriorityQueue"},{"p":"hw04","l":"GenericValuePriorityQueue"},{"p":"hw04","l":"PriorityQueue"}];updateSearchResults();
